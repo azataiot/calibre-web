@@ -3,7 +3,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+v39/
+v310/
+v311/
 # Distribution / packaging
 .Python
 .python-version
