@@ -54,6 +54,8 @@ from .usermanagement import login_required_if_no_ano
 from .kobo_sync_status import remove_synced_book
 from .render_template import render_title_template
 from .kobo_sync_status import change_archived_books
+from .services.worker import WorkerThread
+from .tasks_status import render_task_status
 
 feature_support = {
     'ldap': bool(services.ldap),
@@ -390,7 +392,7 @@ def render_books_list(data, sort_param, book_id, page):
     elif data == "archived":
         return render_archived_books(page, order)
     elif data == "search":
-        term = (request.args.get('query') or '')
+        term = json.loads(flask_session.get('query', ''))
         offset = int(int(config.config_books_per_page) * (page - 1))
         return render_search_results(term, offset, order, config.config_books_per_page)
     elif data == "advsearch":
