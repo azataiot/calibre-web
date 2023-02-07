@@ -13,6 +13,10 @@ Calibre-Web is a web app providing a clean interface for browsing, reading and d
 
 ![Main screen](https://github.com/janeczku/calibre-web/wiki/images/main_screen.png)
 
+## Why this clone?
+
+This clone is a fork of [calibre-web](https://github.com/janeczku/calibre-web) and tries to target newer python versions with typing support.
+
 ## Features
 
 - Bootstrap 3 HTML5 interface
