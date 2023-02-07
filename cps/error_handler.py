@@ -20,6 +20,7 @@ import traceback
 
 from flask import render_template
 from werkzeug.exceptions import default_exceptions
+
 try:
     from werkzeug.exceptions import FailedDependency
 except ImportError:
@@ -27,8 +28,8 @@ except ImportError:
 
 from . import config, app, logger, services
 
-
 log = logger.create()
+
 
 # custom error page
 def error_http(error):
@@ -52,6 +53,7 @@ def internal_error(error):
                            instance=config.config_calibre_web_title
                            ), 500
 
+
 def init_errorhandler():
     # http error handling
     for ex in default_exceptions:
@@ -60,7 +62,6 @@ def init_errorhandler():
         elif ex == 500:
             app.register_error_handler(ex, internal_error)
 
-
     if services.ldap:
         # Only way of catching the LDAPException upon logging in with LDAP server down
         @app.errorhandler(services.ldap.LDAPException)
@@ -68,4 +69,3 @@ def init_errorhandler():
         def handle_exception(e):
             log.debug('LDAP server not accessible while trying to login to opds feed')
             return error_http(FailedDependency())
-
